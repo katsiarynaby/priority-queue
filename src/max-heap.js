@@ -5,21 +5,21 @@ class MaxHeap {
 		this.parentNodes = [];
 		this.root = null;
 
-		this.size = 0;
+		this.sizeHeap = 0;
 	}
 
 	push(data, priority) {
-		this.size++;
+		this.sizeHeap++;
 
-		const newNode = new Node(data, priority);
+		let newNode = new Node(data, priority);
 
 		this.insertNode(newNode);
 		this.shiftNodeUp(newNode);
 	}
 
 	pop() {
-		if (!this.size ===0 ){
-			this.size--;
+		if (!this.sizeHeap ===0 ){
+			this.sizeHeap--;
 
 		}
 	}
@@ -37,7 +37,7 @@ class MaxHeap {
 	}
 
 	size() {
-		return this.size;
+		return this.sizeHeap;
 	}
 
 	isEmpty() {
@@ -49,7 +49,7 @@ class MaxHeap {
 		this.parentNodes = [];
 		this.root = null;
 
-		this.size = 0;
+		this.sizeHeap = 0;
 	}
 
 	insertNode(node) {

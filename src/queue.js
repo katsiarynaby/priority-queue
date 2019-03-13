@@ -13,7 +13,6 @@ class PriorityQueue {
 			throw new Error('queue has max size');
 		}
 
-		
 	}
 
 
