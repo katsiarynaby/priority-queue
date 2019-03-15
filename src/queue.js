@@ -17,7 +17,10 @@ class PriorityQueue {
 
 
 	shift() {
-
+		if (this.heap.parentNodes.length > 0) {
+			return this.heap.pop();
+		}
+		else throw new Error('queue is empty');
 	}
 
 	size() {
