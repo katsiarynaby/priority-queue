@@ -70,7 +70,19 @@ class MaxHeap {
 
 
 	shiftNodeUp(node) {
+		let parent = node.parent;
+		if (parent) {
+			if (node.priority > parent.priority) {
+				let nodeIndex = this.parentNodes.indexOf(node);
+				let parentIndex = this.parentNodes.indexOf(parent);
 
+				this.parentNodes[nodeIndex] = parent;
+				this.parentNodes[parentIndex] = node;
+
+				node.swapWithParent();
+				this.shiftNodeUp(node);
+			}
+		} else this.root = node;
 	}
 
 	shiftNodeDown(node) {
