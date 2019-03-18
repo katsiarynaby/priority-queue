@@ -19,13 +19,13 @@ class MaxHeap {
 
 	pop() {
 		if (!this.isEmpty()) {
-			// let data = this.root.data;
+			let data = this.root.data;
 			let detached = this.detachRoot();
-		this.restoreRootFromLastInsertedNode(detached);
-		this.shiftNodeDown(this.root);
+			this.restoreRootFromLastInsertedNode(detached);
+			this.shiftNodeDown(this.root);
 			this.sizeHeap--;
-			return this.root.data;
-		} ;
+			return data;
+		}  else return;
 	}
 
 	detachRoot() {
@@ -46,8 +46,14 @@ class MaxHeap {
 			return;
 		}
 		let node = this.parentNodes.pop();
+		if (node == null) {
+			return;
+		}
+		
 		if (node.parent && node.parent != detached && node.parent.right == node) {
+			
 			this.parentNodes.unshift(node.parent);
+			
 		}
 		node.remove();
 
@@ -107,8 +113,8 @@ class MaxHeap {
 				let nodeIndex = this.parentNodes.indexOf(node);
 				let parentIndex = this.parentNodes.indexOf(parent);
 
-				this.parentNodes[nodeIndex] = parent;
-				this.parentNodes[parentIndex] = node;
+			if (nodeIndex > -1 ) this.parentNodes[nodeIndex] = parent;
+			if (parentIndex > -1 ) this.parentNodes[parentIndex] = node;
 
 				node.swapWithParent();
 				this.shiftNodeUp(node);
@@ -117,14 +123,17 @@ class MaxHeap {
 	}
 
 	shiftNodeDown(node) {
+		if (node == null) {
+			return
+		}
 		if (node.left && node.right
 			&& node.priority < node.left.priority && node.left.priority > node.right.priority
 			|| node.left && !(node.right) && node.priority < node.left.priority) {
 			let nodeIndex = this.parentNodes.indexOf(node);
 			let nodeLeftIndex = this.parentNodes.indexOf(node.left);
 
-			this.parentNodes[nodeIndex] = node.left;
-			this.parentNodes[nodeLeftIndex] = node;
+			if (nodeIndex > -1) this.parentNodes[nodeIndex] = node.left;
+			if (nodeLeftIndex > -1) this.parentNodes[nodeLeftIndex] = node;
 
 
 			node.left.swapWithParent();
@@ -139,8 +148,8 @@ class MaxHeap {
 			let nodeIndex = this.parentNodes.indexOf(node);
 			let nodeRightIndex = this.parentNodes.indexOf(node.right);
 
-			this.parentNodes[nodeIndex] = node.right;
-			this.parentNodes[nodeRightIndex] = node;
+			if (nodeIndex > -1) this.parentNodes[nodeIndex] = node.right;
+			if (nodeRightIndex > -1) this.parentNodes[nodeRightIndex] = node;
 
 
 			node.right.swapWithParent();
